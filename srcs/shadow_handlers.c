@@ -1,14 +1,19 @@
 #include "minirt.h"
 
-int			shadow_cheker(t_vector a, t_vector b, t_vector c)
+int			shadow_checker(t_p_shadow *t_shadow)
 {
 	double A;
 	double B;
+	t_vector v1;
+	t_vector v2;
 
-
-	A = length(substract(b, a));
-	B = length(substract(c, a));
-	return (A >= B);
+	A = length(substract(t_shadow->light_pos, t_shadow->new_start));
+	B = length(substract(t_shadow->pos_hit, t_shadow->new_start));
+	v1 = make_unit_vector(t_shadow->cam_dir);
+	v2 = make_unit_vector(substract(t_shadow->pos_hit, t_shadow->light_pos));
+	if (scalar(v1, v2) >= 0.01 && A >= B)
+			return (1);
+	return (0);
 }
 
 t_vector approCorrector(t_vector v)
@@ -63,9 +68,9 @@ int shadow_handler(t_p_shadow *t_shadow, t_objects *lights, int color)
 		if (p != t_shadow->p)
 		{
 			t = interShadowFuncs(t_shadow, p, lights);
-			if (t >= 0 && shadow_cheker(t_shadow->new_start, t_shadow->light_pos, t_shadow->pos_hit))
+			if (t >= 0 && shadow_checker(t_shadow) == 1)
 			{
-				shadowColor = multiple(0.5, multiple((double)1 / 255, t_shadow->color_shadow));
+				shadowColor = multiple(0.5, multiple((double)1 / 255, /* t_shadow->color_shadow */(t_vector){0, 0, 0}));
 				return (rgb_maker(color_clamping(shadowColor)));
 			}
 		}
