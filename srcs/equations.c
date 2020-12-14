@@ -14,7 +14,8 @@
 
 double			distance_exist(t_ray r, double *distance, double t)
 {
-	*distance = t;
+	if (r.id == 0)
+		*distance = t;
 	return (t);
 }
 
