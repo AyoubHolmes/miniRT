@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 13:47:06 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/11/26 18:50:28 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 18:47:12 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				pl_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 4)
 	{
 		data = ft_split_whitespaces(line);
@@ -36,7 +36,7 @@ int				sq_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 5)
 	{
 		data = ft_split_whitespaces(line);
@@ -56,7 +56,7 @@ int				cy_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 6)
 	{
 		data = ft_split_whitespaces(line);
@@ -77,7 +77,7 @@ int				tr_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 5)
 	{
 		data = ft_split_whitespaces(line);

@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 13:49:43 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/11/26 19:18:54 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 17:38:01 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_objects		*cam_initializer(char **vp, char **cn, char *fov)
 		return (0);
 	cam->view_point = initialize_vector(atof(vp[0]), atof(vp[1]), atof(vp[2]));
 	cam->cam_normal = initialize_vector(atof(cn[0]), atof(cn[1]), atof(cn[2]));
+	cam->cam_normal.x += 0.0001;
 	cam->fov = strtof(fov, NULL);
 	obj->id = 2;
 	obj->content = cam;

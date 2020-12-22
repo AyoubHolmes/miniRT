@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:15:52 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/04 14:44:54 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 18:46:21 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct					s_passage_cy
 typedef struct					s_p_shadow
 {
 	int							color;
+	t_ambient					am;
 	t_vector					new_start;
 	t_vector					color_shadow;
 	t_vector					light_pos;
@@ -250,6 +251,7 @@ int								tr_checker(char *line);
 int								ft_putstr_fd(char *s, int fd);
 void							error_printer(t_err err);
 int								ft_nbr_words(char *str, char c);
+int								nb_word(char *str);
 void							*ft_memcpy(void *dst, const \
 								void *src, size_t n);
 size_t							ft_strlen(const char *s);
@@ -299,8 +301,8 @@ int								triangle_handler(t_ray r, double *distance,
 								double *t, t_p_shadow *t_shadow);
 int								shadow_handler(t_p_shadow *t_shadow, t_objects \
 								*lights, int color);
-int								color_calculator(t_ray r, double t, t_objects \
-								*lights, t_vector n);
+int								color_calculator(t_ray r, double t, t_p_shadow *t_shadow,
+												t_vector n);
 int								get_pixel_color(t_ray r, double *distance,
 								double *d_shadow, t_data d);
 int								mlx_get_screen_size(void *mlx_ptr, \

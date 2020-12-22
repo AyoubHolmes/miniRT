@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 11:34:31 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/11/26 18:50:28 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 18:46:35 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int				r_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 3)
 	{
 		data = ft_split_whitespaces(line);
@@ -34,7 +34,7 @@ int				a_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 3)
 	{
 		data = ft_split_whitespaces(line);
@@ -52,7 +52,7 @@ int				c_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 4)
 	{
 		data = ft_split_whitespaces(line);
@@ -70,7 +70,7 @@ int				l_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 4)
 	{
 		data = ft_split_whitespaces(line);
@@ -89,7 +89,7 @@ int				sp_checker(char *line)
 	int			i;
 	char		**data;
 
-	i = ft_nbr_words(line, ' ');
+	i = nb_word(line);
 	if (i == 4)
 	{
 		data = ft_split_whitespaces(line);

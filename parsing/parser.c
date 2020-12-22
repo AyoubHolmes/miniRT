@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:22:15 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/04 12:36:08 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 18:31:00 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_err			error_return(char *line)
 
 void			error_procedure(t_err *err, char *line)
 {
-	err->line++;
 	err->is_checked = data_checker(line);
 	my_free_main(line);
 }
@@ -45,6 +44,7 @@ t_err			file_checker(char *file)
 		rest = get_next_line(fd, &line);
 		if (rest < 0)
 			return (error_return(line));
+		err.line++;
 		if (line[0] == '\0')
 			continue;
 		error_procedure(&err, line);

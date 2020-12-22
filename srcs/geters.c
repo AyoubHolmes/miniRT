@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:13:07 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/04 14:49:23 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 17:48:42 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				get_pixel_color(t_ray r, double *distance,
 	*distance = INT_MAX;
 	t_shadow.d_shadow = INT_MAX;
 	p = d.obj;
+	t_shadow.am = d.a;
 	t_shadow.obj = d.obj;
 	t_shadow.cam_dir = r.b;
 	t_shadow.lights = d.lights;

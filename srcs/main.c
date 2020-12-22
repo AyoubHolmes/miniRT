@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 09:57:49 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/04 10:17:53 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 17:45:44 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int			main(int argc, char **argv)
 	{
 		m.d = parse(argv, &m, argc);
 		m.w.mlx_ptr = mlx_init();
-		//mlx_get_screen_size(m.w.mlx_ptr, &a, &b);
-		//m.d.r = resize(m.d.r, a, b);
+		mlx_get_screen_size(m.w.mlx_ptr, &a, &b);
+		m.d.r = resize(m.d.r, a, b);
 		m.w.win_ptr = mlx_new_window(m.w.mlx_ptr,m.d.r.x,m.d.r.y,"miniRT");
 		m.w.img_ptr = mlx_new_image(m.w.mlx_ptr,m.d.r.x,m.d.r.y);
 		m.w.img_data = (int *)mlx_get_data_addr(m.w.img_ptr, &m.w.bpp, &m.w.size_l, &m.w.img_endian);

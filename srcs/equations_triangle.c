@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 11:38:40 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/04 12:40:00 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/22 17:53:35 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ double			equation_triangle(t_ray r, t_objects *obj, double *distance)
 	double		epsilon;
 	t_triangle	*tr;
 	t_vector	vecs[5];
-	double		eq[5];
 	double		vars[4];
 
 	epsilon = 0.0000001;
