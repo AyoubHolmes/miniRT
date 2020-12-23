@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 12:53:48 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/11/26 18:50:28 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:36:10 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_isintensityfloat(char *c)
 			return (0);
 		i++;
 	}
-	k = atof(c);
+	k = ft_atof(c);
 	if (k >= 0 && k <= 1)
 		return (1);
 	return (0);
@@ -46,7 +46,7 @@ int		ft_iscolorfloat(char *c)
 			return (0);
 		i++;
 	}
-	k = atof(c);
+	k = ft_atof(c);
 	if (k > 255)
 		return (0);
 	return (1);

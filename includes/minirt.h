@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:15:52 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/22 18:46:21 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:36:10 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,9 @@ typedef struct					s_err
 {
 	int							is_checked;
 	int							line;
+	int							am_exists;
+	int							r_exists;
+	int							c_exists;
 }								t_err;
 
 typedef struct					s_icam
@@ -230,6 +233,7 @@ void							square_printer (t_square *p);
 void							cylinder_printer(t_cylinder *cy);
 void							triangle_printer(t_triangle *tr);
 void							objects_debugger(t_data d);
+double							ft_atof(char *s);
 int								ft_isdigit(int c);
 int								ft_isint(char *c);
 int								ft_ispositiveint(char *c);
@@ -238,10 +242,10 @@ int								ft_ispositivefloat(char *c);
 int								ft_isintensityfloat(char *c);
 int								ft_iscolorfloat(char *c);
 int								ft_isvector(char *c, int (*func)());
-int								data_checker(char *line);
-int								r_checker(char *line);
-int								a_checker(char *line);
-int								c_checker(char *line);
+int								data_checker(char *line, t_err *err);
+int								r_checker(char *line, t_err *err);
+int								a_checker(char *line, t_err *err);
+int								c_checker(char *line, t_err *err);
 int								l_checker(char *line);
 int								sp_checker(char *line);
 int								pl_checker(char *line);
@@ -301,8 +305,8 @@ int								triangle_handler(t_ray r, double *distance,
 								double *t, t_p_shadow *t_shadow);
 int								shadow_handler(t_p_shadow *t_shadow, t_objects \
 								*lights, int color);
-int								color_calculator(t_ray r, double t, t_p_shadow *t_shadow,
-												t_vector n);
+int								color_calculator(t_ray r, double t,
+											t_p_shadow *t_shadow, t_vector n);
 int								get_pixel_color(t_ray r, double *distance,
 								double *d_shadow, t_data d);
 int								mlx_get_screen_size(void *mlx_ptr, \
@@ -314,6 +318,7 @@ void							free_list(t_objects *list);
 t_vector						rotatevect(t_vector to_rot, t_vector rotvec);
 t_err							file_checker(char *file);
 t_data							file_parser(char *file);
+t_err							file_extension_checker(char *str);
 void							graphic_drawer(t_main *m);
 int								key_press(int keycode, t_main *m);
 #endif

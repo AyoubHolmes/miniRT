@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 20:28:46 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/11/27 09:36:02 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:40:40 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void			a_insertion(t_data *d, char **data)
 {
 	char		**ambient_color;
 
-	d->a.perc = strtof(data[1], NULL);
+	d->a.perc = ft_atof(data[1]);
 	ambient_color = ft_split(data[2], ',');
-	d->a.t_ambient_color = (t_vector){ strtof(ambient_color[0], NULL)\
-		, strtof(ambient_color[1], NULL), strtof(ambient_color[2], NULL) };
+	d->a.t_ambient_color = (t_vector){ ft_atof(ambient_color[0])\
+		, ft_atof(ambient_color[1]), ft_atof(ambient_color[2]) };
 }
 
 void			c_insertion(t_data *d, char **data)

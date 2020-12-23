@@ -5,63 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 14:40:16 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/22 18:08:28 by aboulbaz         ###   ########.fr       */
+/*   Created: 2020/12/22 20:11:39 by aboulbaz          #+#    #+#             */
+/*   Updated: 2020/12/22 20:17:13 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int sphere_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
+int					sphere_handler(t_ray r, double *distance,
+					double *t, t_p_shadow *t_shadow)
 {
-	t_vector new_start;
-	t_vector N;
+	t_vector		new_start;
+	t_vector		norm;
 
 	r.id = 0;
-    *t = equation_sphere(r, t_shadow->p, distance);
-    if (*t > 0 && *t <= *distance)
-    {
-        t_shadow->new_start = line_point(r, *t);
-        N = make_unit_vector(substract(t_shadow->new_start ,(*(t_sphere*)t_shadow->p->content).sphere_center));
-		t_shadow->color_shadow = (*(t_sphere*)t_shadow->p->content).color_sphere;
-		t_shadow->object_dir = N;
-		r.color_obj = t_shadow->color_shadow;
-		t_shadow->color = color_calculator(r, *t, t_shadow, N);
-		r.id = 1;
-		t_shadow->color = shadow_handler(t_shadow, t_shadow->lights, t_shadow->color);
-
-    }
-    return (t_shadow->color);
-}
-
-int plane_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
-{
-    t_plane pl;
-
-	r.id = 0;
-    *t = equation_plane(r, t_shadow->p, distance);
-    if (*t > 0 && *t >= *distance)
-    {
+	*t = equation_sphere(r, t_shadow->p, distance);
+	if (*t > 0 && *t <= *distance)
+	{
 		t_shadow->new_start = line_point(r, *t);
-		pl = *(t_plane*)t_shadow->p->content;
-		t_shadow->color_shadow = pl.color_plane;
-		t_shadow->object_dir = pl.plane_norm;
-    	if (scalar(r.b, pl.plane_norm) > 0)
-			pl.plane_norm = multiple(-1, pl.plane_norm);
+		norm = make_unit_vector(substract(t_shadow->new_start,
+		(*(t_sphere*)t_shadow->p->content).sphere_center));
+		t_shadow->color_shadow =
+		(*(t_sphere*)t_shadow->p->content).color_sphere;
+		t_shadow->object_dir = norm;
 		r.color_obj = t_shadow->color_shadow;
-		t_shadow->color = color_calculator(r, *t, t_shadow, pl.plane_norm);
+		t_shadow->color = color_calculator(r, *t, t_shadow, norm);
 		r.id = 1;
-		t_shadow->color = shadow_handler(t_shadow, t_shadow->lights, t_shadow->color);
+		t_shadow->color = shadow_handler(t_shadow,
+						t_shadow->lights, t_shadow->color);
 	}
 	return (t_shadow->color);
 }
 
-int square_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
+int					plane_handler(t_ray r, double *distance,
+					double *t, t_p_shadow *t_shadow)
 {
-    t_square sq;
+	t_plane			pl;
 
 	r.id = 0;
-    *t = equation_square(r, t_shadow->p, distance);
+	*t = equation_plane(r, t_shadow->p, distance);
+	if (*t > 0 && *t >= *distance)
+	{
+		t_shadow->new_start = line_point(r, *t);
+		pl = *(t_plane*)t_shadow->p->content;
+		t_shadow->color_shadow = pl.color_plane;
+		t_shadow->object_dir = pl.plane_norm;
+		if (scalar(r.b, pl.plane_norm) > 0)
+			pl.plane_norm = multiple(-1, pl.plane_norm);
+		r.color_obj = t_shadow->color_shadow;
+		t_shadow->color = color_calculator(r, *t, t_shadow, pl.plane_norm);
+		r.id = 1;
+		t_shadow->color = shadow_handler(t_shadow,
+						t_shadow->lights, t_shadow->color);
+	}
+	return (t_shadow->color);
+}
+
+int					square_handler(t_ray r, double *distance,
+					double *t, t_p_shadow *t_shadow)
+{
+	t_square		sq;
+
+	r.id = 0;
+	*t = equation_square(r, t_shadow->p, distance);
 	if (*t >= 0 && *t >= *distance)
 	{
 		t_shadow->new_start = line_point(r, *t);
@@ -73,18 +79,20 @@ int square_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
 		r.color_obj = t_shadow->color_shadow;
 		t_shadow->color = color_calculator(r, *t, t_shadow, sq.square_norm);
 		r.id = 1;
-		t_shadow->color = shadow_handler(t_shadow, t_shadow->lights, t_shadow->color);
+		t_shadow->color = shadow_handler(t_shadow,
+						t_shadow->lights, t_shadow->color);
 	}
-    return (t_shadow->color);
+	return (t_shadow->color);
 }
 
-int cylinder_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
+int					cylinder_handler(t_ray r,
+					double *distance, double *t, t_p_shadow *t_shadow)
 {
-    t_cylinder cy;
-	t_passage_cy pass;
+	t_cylinder		cy;
+	t_passage_cy	pass;
 
 	r.id = 0;
-    pass = equation_cylinder(r, t_shadow->p, distance);
+	pass = equation_cylinder(r, t_shadow->p, distance);
 	*t = pass.t;
 	if (*t >= 0 && *t >= *distance)
 	{
@@ -95,35 +103,38 @@ int cylinder_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
 		r.color_obj = t_shadow->color_shadow;
 		t_shadow->color = color_calculator(r, *t, t_shadow, pass.n);
 		r.id = 1;
-		t_shadow->color = shadow_handler(t_shadow, t_shadow->lights, t_shadow->color);
+		t_shadow->color = shadow_handler(t_shadow,
+						t_shadow->lights, t_shadow->color);
 	}
-    return (t_shadow->color);
+	return (t_shadow->color);
 }
 
-int triangle_handler(t_ray r, double *distance, double *t, t_p_shadow *t_shadow)
+int					triangle_handler(t_ray r,
+					double *distance, double *t, t_p_shadow *t_shadow)
 {
-    t_triangle tr;
-	t_vector V1;
-	t_vector V2;
-	t_vector V;
+	t_triangle		tr;
+	t_vector		v1;
+	t_vector		v2;
+	t_vector		v;
 
 	r.id = 0;
-    *t = equation_triangle(r, t_shadow->p, distance);
-    if (*t > 0)
-    {
+	*t = equation_triangle(r, t_shadow->p, distance);
+	if (*t > 0)
+	{
 		t_shadow->new_start = line_point(r, *t);
 		tr = *(t_triangle*)t_shadow->p->content;
 		t_shadow->color_shadow = tr.triangle_color;
-		V1 = substract(tr.second_point, tr.first_point);
-		V2 = substract(tr.third_point, tr.first_point);
-		V = make_unit_vector(v_product(V1, V2));
-		if (scalar(r.b, V) > 0)
-			V = multiple(-1, V);
-		t_shadow->object_dir = V;
+		v1 = substract(tr.second_point, tr.first_point);
+		v2 = substract(tr.third_point, tr.first_point);
+		v = make_unit_vector(v_product(v1, v2));
+		if (scalar(r.b, v) > 0)
+			v = multiple(-1, v);
+		t_shadow->object_dir = v;
 		r.color_obj = t_shadow->color_shadow;
-		t_shadow->color = color_calculator(r, *t, t_shadow, V);
+		t_shadow->color = color_calculator(r, *t, t_shadow, v);
 		r.id = 1;
-		t_shadow->color = shadow_handler(t_shadow, t_shadow->lights, t_shadow->color);
+		t_shadow->color = shadow_handler(t_shadow,
+						t_shadow->lights, t_shadow->color);
 	}
 	return (t_shadow->color);
 }

@@ -20,6 +20,8 @@ SRC = ./srcs/camera.c \
 		./srcs/rotatevect.c\
 		./srcs/operations.c \
 		./srcs/key_press.c\
+		./srcs/light_helper.c\
+		./srcs/ft_atof.c \
 		./parsing/checkers.c \
 		./parsing/checkers2.c \
 		./parsing/data_checker_handler.c \

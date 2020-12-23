@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:33:20 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/01 14:42:59 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:35:55 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void			rotate(t_data *d, char **data)
 	char		**values;
 
 	values = ft_split(data[1], ',');
-	rotvec = (t_vector){atof(values[0]), atof(values[1]),
-	atof(values[2])};
+	rotvec = (t_vector){ft_atof(values[0]), ft_atof(values[1]),
+	ft_atof(values[2])};
 	if (d->last_obj->id == 2)
 		((t_cam_data*)d->last_obj->content)->cam_normal = rotatevect(
 		((t_cam_data*)d->last_obj->content)->cam_normal, rotvec);
@@ -48,8 +48,8 @@ void			translate(t_data *d, char **data)
 	char		**values;
 
 	values = ft_split(data[1], ',');
-	tvec = (t_vector){atof(values[0]), atof(values[1]),
-	atof(values[2])};
+	tvec = (t_vector){ft_atof(values[0]), ft_atof(values[1]),
+	ft_atof(values[2])};
 	if (d->last_obj->id == 2)
 		((t_cam_data*)d->last_obj->content)->view_point = transvect(
 		((t_cam_data*)d->last_obj->content)->view_point, tvec);

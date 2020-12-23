@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 13:49:43 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/22 17:38:01 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:36:10 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_objects		*ligth_initializer(char **lp, char **lc, char *brightness)
 		return (0);
 	if (!(obj = (t_objects*)malloc(sizeof(t_objects))))
 		return (0);
-	light->light_pos = initialize_vector(atof(lp[0]), atof(lp[1]), atof(lp[2]));
-	light->light_color = initialize_vector(atof(lc[0]), \
-						atof(lc[1]), atof(lc[2]));
-	light->brightness = strtof(brightness, NULL);
+	light->light_pos = initialize_vector(ft_atof(lp[0]), ft_atof(lp[1]), ft_atof(lp[2]));
+	light->light_color = initialize_vector(ft_atof(lc[0]), \
+						ft_atof(lc[1]), ft_atof(lc[2]));
+	light->brightness = ft_atof(brightness);
 	obj->id = 3;
 	obj->content = light;
 	obj->next = NULL;
@@ -40,10 +40,10 @@ t_objects		*cam_initializer(char **vp, char **cn, char *fov)
 		return (0);
 	if (!(obj = (t_objects*)malloc(sizeof(t_objects))))
 		return (0);
-	cam->view_point = initialize_vector(atof(vp[0]), atof(vp[1]), atof(vp[2]));
-	cam->cam_normal = initialize_vector(atof(cn[0]), atof(cn[1]), atof(cn[2]));
+	cam->view_point = initialize_vector(ft_atof(vp[0]), ft_atof(vp[1]), ft_atof(vp[2]));
+	cam->cam_normal = initialize_vector(ft_atof(cn[0]), ft_atof(cn[1]), ft_atof(cn[2]));
 	cam->cam_normal.x += 0.0001;
-	cam->fov = strtof(fov, NULL);
+	cam->fov = ft_atof(fov);
 	obj->id = 2;
 	obj->content = cam;
 	obj->next = NULL;

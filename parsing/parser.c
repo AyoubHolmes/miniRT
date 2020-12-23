@@ -6,7 +6,7 @@
 /*   By: aboulbaz <aboulbaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:22:15 by aboulbaz          #+#    #+#             */
-/*   Updated: 2020/12/22 18:31:00 by aboulbaz         ###   ########.fr       */
+/*   Updated: 2020/12/23 11:15:46 by aboulbaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,44 @@ t_err			error_return(char *line)
 
 void			error_procedure(t_err *err, char *line)
 {
-	err->is_checked = data_checker(line);
+	err->is_checked = data_checker(line, err);
 	my_free_main(line);
+}
+
+t_err			err_init()
+{
+	t_err err;
+
+	err.line = 0;
+	err.am_exists = 0;
+	err.c_exists = 0;
+	err.r_exists = 0;
+	return (err);
+}
+
+void			end_file_check(t_err *err)
+{
+	if (err->c_exists == 0)
+		err->is_checked = -25;
+	else if (err->r_exists == 0)
+		err->is_checked = -26;
+	else if (err->am_exists == 0)
+		err->is_checked = -27;
+	else
+		err->is_checked = 1;
 }
 
 t_err			file_checker(char *file)
 {
-	int			is_checked;
+	int			tab[3];
 	char		*line;
 	int			fd;
 	int			rest;
 	t_err		err;
 
 	fd = open(file, O_RDONLY);
+	err = err_init();
 	rest = 1;
-	err.line = 0;
 	while (rest == 1)
 	{
 		rest = get_next_line(fd, &line);
@@ -52,7 +75,7 @@ t_err			file_checker(char *file)
 			return (err);
 	}
 	close(fd);
-	err.is_checked = 1;
+	end_file_check(&err);
 	return (err);
 }
 
